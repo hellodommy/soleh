@@ -5,26 +5,18 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
 
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/sgds.css">
     <link rel="stylesheet" href="css/style.css">
 
-    <title>Hello, world!</title>
+    <title>soleh!</title>
 </head>
 
 <body>
 
-    <div class="sgds-masthead">
-        <a href="https://www.gov.sg" target="_blank">
-            <span class="sgds-icon sgds-icon-sg-crest"></span>
-            <span class="is-text">A Singapore Government Agency Website</span>
-        </a>
-    </div>
-
     <nav class="sgds-navbar" role="navigation">
         <div class="sgds-navbar-brand">
             <a class="sgds-navbar-item">
-                <img src="/assets/img/logo_sgds.svg" alt="Design System" />
+                <img src="img/sun.png" alt="Design System" />
             </a>
             <div class="sgds-navbar-burger" data-target="mainnav-1">
                 <span></span>
@@ -35,23 +27,47 @@
         <div id="mainnav-1" class="sgds-navbar-menu">
             <div class="sgds-navbar-start">
                 <a class="sgds-navbar-item is-uppercase is-active is-tab">
-                    Who we are
+                    Home
                 </a>
-                <a class="sgds-navbar-item is-uppercase is-tab">
-                    Link 2
+                <a class="sgds-navbar-item is-uppercase is-tab" href="about.html">
+                    About
                 </a>
-                <a class="sgds-navbar-item is-uppercase is-tab">
-                    Link 3
-                </a>
-            </div>
-            <div class="sgds-navbar-end">
-                <a class="sgds-navbar-item is-uppercase is-tab">
-                    Link 4
+                <a class="sgds-navbar-item is-uppercase is-tab" href="support.html">
+                    Support
                 </a>
             </div>
         </div>
     </nav>
 
+    <section class="sgds-section">
+        <div class="sgds-container is-fluid">
+            fluid container
+        </div>
+    </section>
+
+    <footer class='sgds-footer my-footer'>
+        <div class="bottom-section is-light">
+            <div class="sgds-container is-fluid">
+                <div class="row is-multiline">
+                    <div class="col is-12">
+                        <ul>
+                            <li>
+                                <a href="https://tech.gov.sg/report_vulnerability" target="_blank">Report Vulnerability</a>
+                            </li>
+                            <li><a href="">Privacy</a></li>
+                            <li><a href="">Terms of Use</a></li>
+                        </ul>
+                    </div>
+                    <div class="col is-12 has-text-right-desktop has-text-right-tablet has-text-left-mobile">
+                        <p class="is-hidden-touch"> © 2020 Dominique Ng. Last Updated
+                            07 May 2020</p>
+                        <p class="is-hidden-desktop">© 2020 Dominique Ng</p>
+                        <p class="is-hidden-desktop last-updated">Last Updated 07 May 2020</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <script src="/my/static/files/jquery-3.4.1.min.js"></script>
     <script src="js/sgds.js"></script>

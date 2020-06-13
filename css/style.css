@@ -1,0 +1,9 @@
+.my-footer {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+}
+
+.sgds-footer>.bottom-section {
+    background-color: #f5f5f5;
+}
