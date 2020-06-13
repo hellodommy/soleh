@@ -3,11 +3,11 @@ const url = "https://api.data.gov.sg/v1/environment/2-hour-weather-forecast";
 const queryParams = "?date=";
 
 // Selecting page elements
-const inputField = document.querySelector("#input");
+const inputField = document.querySelector("#date-input");
 const submit = document.querySelector("#submit");
 const responseField = document.querySelector("#responseField");
 
-// AJAX function
+// AJAX functio
 const getWeather = () => {
     const dateQuery = inputField.value;
     const endpoint = `${url}${queryParams}${dateQuery}`;
@@ -30,6 +30,10 @@ const displayWeather = (event) => {
     getWeather();
 };
 
+function getLocation() {
+    const e = document.getElementById("location");
+    const strUser = e.options[e.selectedIndex].text;
+}
 
 // Formats response to look presentable on webpage
 const renderResponse = (res) => {
@@ -56,5 +60,19 @@ function parseDate(dateObject) {
     const dateHeader = `This weather is valid from ${validStart} to ${validEnd}.`
     return dateHeader;
 }
+
+let dropdown = document.getElementById("location");
+dropdown.length = 0;
+
+let defaultOption = document.createElement('option');
+defaultOption.text = 'Choose Region';
+
+dropdown.add(defaultOption);
+dropdown.selectedIndex = 0;
+
+    $.getJSON("./locations.json", function (data) {
+      console.log(data);
+    });
+
 submit.addEventListener("click", displayWeather);
 
