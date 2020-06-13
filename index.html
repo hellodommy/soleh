@@ -41,8 +41,23 @@
 
     <section class="sgds-section">
         <div class="sgds-container is-fluid">
-            fluid container
+            <div class="field">
+                <label class="label" for="hint">weather checker</label>
+                <span class="hint">on this day the sky like how ah?</span>
+                <div class="control">
+                    <input class="input" type="text" id="input" placeholder="YYYY-MM-DD" />
+                </div>
+                <br>
+                <div class="sgds-buttons">
+                    <button class="sgds-button is-primary" id="submit">Submit</button>
+                    <button class="sgds-button">Clear</button>
+                </div>
+            </div>
+
+            <div id="responseField"></div>
+
         </div>
+
     </section>
 
     <footer class='sgds-footer my-footer'>
@@ -69,9 +84,14 @@
         </div>
     </footer>
 
+<!--[Contains information from {name of dataset} accessed on {date of access of dataset} from {source of data} which is made available under the terms of the Singapore Open Data Licence version 1.0 {URL link to licence}]*
+
+-->
+
     <script src="/my/static/files/jquery-3.4.1.min.js"></script>
     <script src="js/sgds.js"></script>
     <script src="js/sgds.js.map"></script>
+    <script src="js/main.js"></script>
 </body>
 
 </html>
