@@ -38,14 +38,36 @@ const renderResponse = (res) => {
         responseField.innerHTML = "<p>Try again!</p><p>There are no UV forecast found for that date!</p>";
     } 
 
+    const locationName = getLocation();
     const responses = res["items"];
     const numResponses = res["items"].length;
-    const recentResponse = responses[numResponses - 1];
-    
-    const dateHeader = parseDate(recentResponse["valid_period"]);
-    const locationHeader = `Your location is ${getLocation()}`;
-    responseField.innerHTML = dateHeader + locationHeader;
+    console.log(numResponses);
+    const divisor = calcDivisor(numResponses);
+    let counter = 1;
+    for(let i = 0; i < numResponses; i = i + divisor) {
+        const currResponse = responses[i];
+        getColWeather(counter, currResponse, locationName);
+        console.log(i);
+        counter++;
+    }
+    responseField.innerHTML = "hello";
     return
+}
+
+function getColWeather(colIndex, response, location) {
+    const dateHeader = parseDate(response["valid_period"]);
+    let forecast;
+    for (let i = 0; i < response["forecasts"].length; i++) {
+        if (response["forecasts"][i]["area"] === location) {
+            forecast = response["forecasts"][i]["forecast"];
+        }
+    }
+    const column = document.querySelector(`#col-${colIndex}`);
+    column.innerHTML = `${dateHeader}<br>${forecast}<br>${location}<br>${colIndex}`;
+}
+
+function calcDivisor(numResponses) {
+    return Math.floor(numResponses / 6);
 }
 
 function getLocation() {
@@ -59,7 +81,7 @@ function parseDate(dateObject) {
     const validEndRaw = dateObject["end"];
     const validStart = `${validStartRaw.substring(0, 10)} ${validStartRaw.substring(11, 16)}`;
     const validEnd = `${validEndRaw.substring(0, 10)} ${validEndRaw.substring(11, 16)}`;
-    const dateHeader = `This weather is valid from ${validStart} to ${validEnd}.`
+    const dateHeader = `<p>This weather is valid from ${validStart} to ${validEnd}.</p>`
     return dateHeader;
 }
 
@@ -411,7 +433,6 @@ function populateLocation() {
 
     let option;
     for (let i = 0; i < data.length; i++) {
-        console.log("hi");
         option = document.createElement("option");
         option.text = data[i]["name"];
         dropdown.add(option);
@@ -419,4 +440,3 @@ function populateLocation() {
 }
 
 submit.addEventListener("click", displayWeather);
-
