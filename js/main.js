@@ -16,7 +16,7 @@ const getWeather = () => {
     xhr.responseType = 'json';
     xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
-            renderResponse(xhr.response);
+            renderResponse(xhr.response, dateQuery);
         }
     }
     xhr.open('GET', endpoint);
@@ -31,7 +31,7 @@ const displayWeather = (event) => {
     getWeather();
 };
 
-const renderResponse = (res) => {
+const renderResponse = (res, userDate) => {
     // Handles if res is falsey
     // In case res comes back as a blank array
     if (res["message"] === "Internal Server Error") {
@@ -40,17 +40,22 @@ const renderResponse = (res) => {
     } else if (res["message"] === "invalid date format") {
         responseField.innerHTML =
           "<p>don't anyhow!</p><p>enter correct date ok?</p>";
+    } else if (res["api_info"]["status"] === "healthy") {
+        const locationName = getLocation();
+        responseField.innerHTML = `Displaying results on ${userDate} for ${locationName}:`;
+        const responses = res["items"];
+        const numResponses = res["items"].length;
+        const divisor = calcDivisor(numResponses);
+        let counter = 1;
+        for (let i = 0; i < numResponses; i = i + divisor) {
+            const currResponse = responses[i];
+            getColWeather(counter, currResponse, locationName);
+            counter++;
+        }
+    } else {
+        responseField.innerHTML = "<p>alamak! don't know what happen leh, never kena this before.</p><p>Help me feedback can?</p>"
     }
-    const locationName = getLocation();
-    const responses = res["items"];
-    const numResponses = res["items"].length;
-    const divisor = calcDivisor(numResponses);
-    let counter = 1;
-    for(let i = 0; i < numResponses; i = i + divisor) {
-        const currResponse = responses[i];
-        getColWeather(counter, currResponse, locationName);
-        counter++;
-    }
+
     return
 }
 
@@ -62,9 +67,28 @@ function getColWeather(colIndex, response, location) {
     for (let i = 0; i < response["forecasts"].length; i++) {
         if (response["forecasts"][i]["area"] === location) {
             forecast = response["forecasts"][i]["forecast"];
-            forecastHeader = `the weather will be ${forecast}`
+            forecastHeader = `${forecast}`
         }
     }
+
+    imgsrc = assignImg(forecast);
+
+    const column = document.querySelector(`#col-${colIndex}`);
+    column.innerHTML = `<div class="sgds-card">
+                        <div class="sgds-card-header">
+                            <p class="sgds-card-header-title"><i class="far fa-clock" id="clock-icon"></i>${dateHeader}</p>
+                        </div>
+                        <div class="sgds-card-content">
+                            ${forecastHeader}<br>
+                            ${imgsrc}
+                        </div>
+                    </div>
+    `;
+
+}
+
+function assignImg(forecast) {
+    let imgsrc;
     if (forecast.includes("Heavy Thundery Showers with Gusty Winds")) {
         imgsrc = generateImg("036-storm-1.png");
     } else if (forecast.includes("Thundery Showers")) {
@@ -84,22 +108,11 @@ function getColWeather(colIndex, response, location) {
     } else {
         imgsrc = generateImg("039-cloudy-1.png");
     }
-
-    const column = document.querySelector(`#col-${colIndex}`);
-    column.innerHTML = `<div class="sgds-card">
-                        <div class="sgds-card-header">
-                            <p class="sgds-card-header-title"><i class="far fa-clock" id="clock-icon"></i>${dateHeader}</p>
-                        </div>
-                        <div class="sgds-card-content">
-                            ${forecastHeader}${imgsrc}
-                        </div>
-                    </div>
-    `;
-
+    return imgsrc;
 }
 
 function generateImg(src) {
-    return `<img src="img/weather/${src}" height="32px" width="32px">`;
+    return `<img src="img/weather/${src}" height="32px" width="32px" class="weather-icon">`;
 }
 
 function calcDivisor(numResponses) {

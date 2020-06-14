@@ -26,3 +26,12 @@
 body {
     background-color: #F4EAF3;
 }
+
+.weather-icon {
+    padding-left: 5px;
+    position: center;
+}
+
+.sgds-card-content {
+    text-align: center;
+}
