@@ -60,3 +60,15 @@ body {
     background-color: transparent;
     color: #6A6AA0;
 }
+
+#todaysDate {
+    display: inline;
+}
+
+.is-rounded {
+    border-radius: 50%;
+}
+
+.social-link {
+    padding: 2px;
+}
