@@ -34,8 +34,9 @@ const displayWeather = (event) => {
 const renderResponse = (res) => {
     // Handles if res is falsey
     // In case res comes back as a blank array
-    if(!res){
-        responseField.innerHTML = "<p>Try again!</p><p>There are no UV forecast found for that date!</p>";
+    if (res["message"] === "Internal Server Error") {
+      responseField.innerHTML =
+        "<p>aiyo, how come like that?</p><p>that day got no forecast leh...</p>";
     } 
 
     const locationName = getLocation();

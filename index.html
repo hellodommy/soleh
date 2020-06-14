@@ -16,7 +16,7 @@
     <nav class="sgds-navbar" role="navigation">
         <div class="sgds-navbar-brand">
             <a class="sgds-navbar-item">
-                <img src="img/sun.png" alt="Design System" />
+                <img src="img/sun.png" alt="sun logo" />
             </a>
             <div class="sgds-navbar-burger" data-target="mainnav-1">
                 <span></span>
@@ -41,55 +41,62 @@
 
     <section class="sgds-section">
         <div class="sgds-container is-fluid">
-            <div class="field">
-                <label class="label">weather checker</label>
-                <span class="hint">on this day the sky like how ah?</span>
-                <div class="control">
-                    <input class="input" type="text" id="date-input" placeholder="YYYY-MM-DD" />
-                </div>
-                <br>
-                <span class="hint">where i stay?</span>
-                <div class="control">
-                    <div class="select">
-                        <select id="location"></select>
+            <div class="row">
+                <div class="col">
+                    <div class="field">
+                        <label class="label">weather checker</label>
+                        <span class="hint">on this day the sky like how ah?</span>
+                        <div class="control">
+                            <input class="input" type="text" id="date-input" placeholder="YYYY-MM-DD" />
+                        </div>
+                        <br>
+                        <span class="hint">where i stay?</span>
+                        <div class="control">
+                            <div class="select">
+                                <select id="location"></select>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="sgds-buttons">
+                            <button class="sgds-button is-primary" id="submit">Submit</button>
+                            <button class="sgds-button">Clear</button>
+                        </div>
                     </div>
                 </div>
-                <br>
-                <div class="sgds-buttons">
-                    <button class="sgds-button is-primary" id="submit">Submit</button>
-                    <button class="sgds-button">Clear</button>
+                <div class="col">
+                    <img src="img/relac.jpg" alt="banner picture">
                 </div>
             </div>
-
-            <div id="responseField"></div>
-            <section class="sgds-section">
-                <div class="sgds-container">
-                    <div class="row">
-                        <div class="col" id="col-1">
-                            
-                        </div>
-                        <div class="col" id="col-2">
-                            
-                        </div>
-                        <div class="col" id="col-3">
-                            
-                        </div>
-                        <div class="col" id="col-4">
-                            
-                        </div>
-                        <div class="col" id="col-5">
-                            
-                        </div>
-                        <div class="col" id="col-6">
-                            
-                        </div>
-                    </div>
-                </div>
-            </section>
-
         </div>
-
     </section>
+
+    <div id="responseField"></div>
+
+    <section class="sgds-section">
+        <div class="sgds-container">
+            <div class="row">
+                <div class="col" id="col-1">
+                    <img src="" id="img-1" />
+                </div>
+                <div class="col" id="col-2">
+                    <img src="" id="img-2" />
+                </div>
+                <div class="col" id="col-3">
+                    <img src="" id="img-3" />
+                </div>
+                <div class="col" id="col-4">
+                    <img src="" id="img-4" />
+                </div>
+                <div class="col" id="col-5">
+                    <img src="" id="img-5" />
+                </div>
+                <div class="col" id="col-6">
+                    <img src="" id="img-6" />
+                </div>
+            </div>
+        </div>
+    </section>
+
 
 <!--[Contains information from {name of dataset} accessed on {date of access of dataset} from {source of data} which is made available under the terms of the Singapore Open Data Licence version 1.0 {URL link to licence}]*
 
