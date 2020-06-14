@@ -39,7 +39,7 @@ const renderResponse = (res, userDate) => {
         "<p>aiyo, how come like that?</p><p>that day got no forecast leh...</p>";
     } else if (res["message"] === "invalid date format") {
         responseField.innerHTML =
-          "<p>don't anyhow!</p><p>enter correct date ok?</p>";
+          "<p>oi, don't anyhow!</p><p>enter correct date ok?</p>";
     } else if (res["api_info"]["status"] === "healthy") {
         const locationName = getLocation();
         responseField.innerHTML = `Displaying results on ${userDate} for ${locationName}:`;

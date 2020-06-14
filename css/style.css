@@ -5,7 +5,7 @@
 }
 
 .sgds-footer>.bottom-section {
-    background-color: #f5f5f5;
+    background-color: #6A6AA0;
 }
 
 .input {
@@ -34,4 +34,29 @@ body {
 
 .sgds-card-content {
     text-align: center;
+}
+
+.sgds-button.is-submit {
+    background-color: #6A6AA0;
+    border-color: transparent;
+    color: #fff;
+}
+
+.sgds-navbar-item.is-tab.is-active {
+    background-color: transparent;
+    border-bottom: 5px solid #6A6AA0;
+    color: #6A6AA0;
+    padding-bottom: calc(.5rem - 1px);
+}
+
+.sgds-navbar-item.is-tab:focus, .sgds-navbar-item.is-tab:hover {
+    background-color: transparent;
+    border-bottom-color: #6A6AA0;
+    border-bottom-width: 5px;
+    padding-bottom: calc(.5rem - 5px);
+}
+
+.sgds-navbar-link.is-active, .sgds-navbar-link:focus, .sgds-navbar-link:focus-within, .sgds-navbar-link:hover, a.sgds-navbar-item.is-active, a.sgds-navbar-item:focus, a.sgds-navbar-item:focus-within, a.sgds-navbar-item:hover {
+    background-color: transparent;
+    color: #6A6AA0;
 }
