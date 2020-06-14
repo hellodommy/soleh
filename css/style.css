@@ -7,3 +7,18 @@
 .sgds-footer>.bottom-section {
     background-color: #f5f5f5;
 }
+
+.input {
+    width: 50%;
+    margin: 10px;
+    vertical-align: middle;
+}
+
+.select {
+    margin: 10px;
+    vertical-align: middle;
+}
+
+#clock-icon {
+    padding-right: 5px;
+}

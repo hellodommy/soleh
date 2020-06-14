@@ -44,16 +44,13 @@ const renderResponse = (res) => {
     const locationName = getLocation();
     const responses = res["items"];
     const numResponses = res["items"].length;
-    console.log(numResponses);
     const divisor = calcDivisor(numResponses);
     let counter = 1;
     for(let i = 0; i < numResponses; i = i + divisor) {
         const currResponse = responses[i];
         getColWeather(counter, currResponse, locationName);
-        console.log(i);
         counter++;
     }
-    responseField.innerHTML = "hello";
     return
 }
 
@@ -65,13 +62,13 @@ function getColWeather(colIndex, response, location) {
     for (let i = 0; i < response["forecasts"].length; i++) {
         if (response["forecasts"][i]["area"] === location) {
             forecast = response["forecasts"][i]["forecast"];
-            forecastHeader = `the weather will be ${forecast}</p>`
+            forecastHeader = `the weather will be ${forecast}`
         }
     }
     if (forecast.includes("Heavy Thundery Showers with Gusty Winds")) {
         imgsrc = generateImg("036-storm-1.png");
     } else if (forecast.includes("Thundery Showers")) {
-        imgsrc = generateImg("040-storm.pngg");
+        imgsrc = generateImg("040-storm.png");
     } else if (forecast.includes("Fair (Night)")) {
         imgsrc = generateImg("2007907.png");
     } else if (forecast.includes("Partly Cloudy (Night)")) {
@@ -89,7 +86,15 @@ function getColWeather(colIndex, response, location) {
     }
 
     const column = document.querySelector(`#col-${colIndex}`);
-    column.innerHTML = `${dateHeader}${forecastHeader}${imgsrc}`;
+    column.innerHTML = `<div class="sgds-card">
+                        <div class="sgds-card-header">
+                            <p class="sgds-card-header-title"><i class="far fa-clock" id="clock-icon"></i>${dateHeader}</p>
+                        </div>
+                        <div class="sgds-card-content">
+                            ${forecastHeader}${imgsrc}
+                        </div>
+                    </div>
+    `;
 
 }
 
@@ -110,9 +115,9 @@ function getLocation() {
 function parseDate(dateObject) {
     const validStartRaw = dateObject["start"];
     const validEndRaw = dateObject["end"];
-    const validStart = `${validStartRaw.substring(0, 10)} ${validStartRaw.substring(11, 16)}`;
-    const validEnd = `${validEndRaw.substring(0, 10)} ${validEndRaw.substring(11, 16)}`;
-    const dateHeader = `<p>From ${validStart} to ${validEnd}, `
+    const validStart = `${validStartRaw.substring(11, 16)}`;
+    const validEnd = `${validEndRaw.substring(11, 16)}`;
+    const dateHeader = `${validStart} to ${validEnd}`
     return dateHeader;
 }
 
