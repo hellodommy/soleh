@@ -112,7 +112,7 @@ function assignImg(forecast) {
 }
 
 function generateImg(src) {
-    return `<img src="img/weather/${src}" height="32px" width="32px" class="weather-icon">`;
+    return `<img src="img/weather/${src}" height="64px" width="64px" class="weather-icon">`;
 }
 
 function calcDivisor(numResponses) {

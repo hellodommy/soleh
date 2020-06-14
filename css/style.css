@@ -32,7 +32,7 @@ body {
 }
 
 .weather-icon {
-    padding-left: 5px;
+    padding: 5px;
     position: center;
 }
 
