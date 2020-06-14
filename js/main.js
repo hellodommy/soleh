@@ -37,8 +37,10 @@ const renderResponse = (res) => {
     if (res["message"] === "Internal Server Error") {
       responseField.innerHTML =
         "<p>aiyo, how come like that?</p><p>that day got no forecast leh...</p>";
-    } 
-
+    } else if (res["message"] === "invalid date format") {
+        responseField.innerHTML =
+          "<p>don't anyhow!</p><p>enter correct date ok?</p>";
+    }
     const locationName = getLocation();
     const responses = res["items"];
     const numResponses = res["items"].length;
@@ -57,14 +59,42 @@ const renderResponse = (res) => {
 
 function getColWeather(colIndex, response, location) {
     const dateHeader = parseDate(response["valid_period"]);
+    let imgsrc;
+    let forecastHeader;
     let forecast;
     for (let i = 0; i < response["forecasts"].length; i++) {
         if (response["forecasts"][i]["area"] === location) {
             forecast = response["forecasts"][i]["forecast"];
+            forecastHeader = `the weather will be ${forecast}</p>`
         }
     }
+    if (forecast.includes("Heavy Thundery Showers with Gusty Winds")) {
+        imgsrc = generateImg("036-storm-1.png");
+    } else if (forecast.includes("Thundery Showers")) {
+        imgsrc = generateImg("040-storm.pngg");
+    } else if (forecast.includes("Fair (Night)")) {
+        imgsrc = generateImg("2007907.png");
+    } else if (forecast.includes("Partly Cloudy (Night)")) {
+        imgsrc = generateImg("031-fog.png");
+    } else if (forecast.includes("Fair & Warm")) {
+        imgsrc = generateImg("027-rainbow-4.png");
+    } else if (forecast.includes("Partly Cloudy (Day)")) {
+        imgsrc = generateImg("032-sunny.png");
+    } else if (forecast.includes("Showers") || forecast.includes("Moderate Rain")) {
+        imgsrc = generateImg("042-rainbow-1.png");
+    } else if (forecast.includes("Cloudy")) {
+        imgsrc = generateImg("039-cloudy-1.png");
+    } else {
+        imgsrc = generateImg("039-cloudy-1.png");
+    }
+
     const column = document.querySelector(`#col-${colIndex}`);
-    column.innerHTML = `${dateHeader}<br>${forecast}<br>${location}<br>${colIndex}`;
+    column.innerHTML = `${dateHeader}${forecastHeader}${imgsrc}`;
+
+}
+
+function generateImg(src) {
+    return `<img src="img/weather/${src}" height="32px" width="32px">`;
 }
 
 function calcDivisor(numResponses) {
@@ -82,7 +112,7 @@ function parseDate(dateObject) {
     const validEndRaw = dateObject["end"];
     const validStart = `${validStartRaw.substring(0, 10)} ${validStartRaw.substring(11, 16)}`;
     const validEnd = `${validEndRaw.substring(0, 10)} ${validEndRaw.substring(11, 16)}`;
-    const dateHeader = `<p>This weather is valid from ${validStart} to ${validEnd}.</p>`
+    const dateHeader = `<p>From ${validStart} to ${validEnd}, `
     return dateHeader;
 }
 
